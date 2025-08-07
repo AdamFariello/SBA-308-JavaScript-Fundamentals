@@ -84,9 +84,23 @@ function getLearnerData(course, ag, submissions) {
 	//TODO: implement this below; How to check if course is in assignment group
 	//console.log(CourseInfo.id === AssignmentGroup.course_id)
 
+	function getAssignGrade(LearnerSubmission) {
+		const assigID = LearnerSubmission.assignment_id
+		const assignment = AssignmentGroup.assignments.filter(e => {
+			e.id === assigID 
+		})
+
+		//TODO check for if score is past due date (probably not checked here)
+		//TODO add checks for zero
+		//TODO add check for null (return zero?)
+		const possiblePoints = assignment.points_possible
+		const score = LearnerSubmission.score 
+		return possiblePoints / score 
+	}
+		
+
 	let result = {}
 	for (LearnerSubmission of LearnerSubmissions) {
-		console.log(LearnerSubmission )
 		if (Object.keys(result).length !== 0 && 
 			LearnerSubmission.learner_id !== result.id) {
 			//TODO: Add function to caluclate average
@@ -99,6 +113,9 @@ function getLearnerData(course, ag, submissions) {
 				avg: null, 
 			}
 		}
+
+		//TODO: Check here or else where for dates
+		result[LearnerSubmission.id] = getAssignGrade(LearnerSubmission)
 	}
 
 	if (Object.keys(result).length !== 0) {
