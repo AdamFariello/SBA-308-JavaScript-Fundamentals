@@ -79,22 +79,36 @@ const LearnerSubmissions = [
 
 //function getLearnerData(CourseInfo, AssignmentGroup, [LearnerSubmission]) 
 function getLearnerData(course, ag, submissions) {	
-	const result = {
-		id: null,
-		avg: null,
-		//All assignments are added during the loop
-	}
 	const resultArray = []
+		
+	//TODO: implement this below; How to check if course is in assignment group
+	//console.log(CourseInfo.id === AssignmentGroup.course_id)
 
-
-
-	//How to check if course is in assignment group
-	console.log(CourseInfo.id === AssignmentGroup.course_id)
-
+	let result = {}
 	for (LearnerSubmission of LearnerSubmissions) {
-
+		console.log(LearnerSubmission )
+		if (Object.keys(result).length !== 0 && 
+			LearnerSubmission.learner_id !== result.id) {
+			//TODO: Add function to caluclate average
+			resultArray.push(result)
+			result = {}
+		}
+		if (Object.keys(result).length === 0) {
+			result = {
+				id: LearnerSubmission.learner_id,
+				avg: null, 
+			}
+		}
 	}
+
+	if (Object.keys(result).length !== 0) {
+		//TODO: Add function to caluclate average
+		resultArray.push(result)
+		result = {}
+	}
+
+	return resultArray
 }
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-//console.log(result)
+console.log(result)
