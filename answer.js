@@ -86,16 +86,22 @@ function getLearnerData(course, ag, submissions) {
 
 	function getAssignGrade(LearnerSubmission) {
 		const assigID = LearnerSubmission.assignment_id
+
 		const assignment = AssignmentGroup.assignments.filter(e => {
-			e.id === assigID 
+			return e.id === assigID  
 		})
 
 		//TODO check for if score is past due date (probably not checked here)
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
-		const possiblePoints = assignment.points_possible
-		const score = LearnerSubmission.score 
-		return possiblePoints / score 
+
+		//console.log(assignment.points_possible) //TODO: Cover in obsidian
+		//console.log(assignment[0].points_possible)
+		const possiblePoints = assignment[0].points_possible
+		const score = LearnerSubmission.submission.score 
+
+		//TODO Implement restricting division to specfic digit (?)
+		return score / possiblePoints 
 	}
 		
 
@@ -115,7 +121,8 @@ function getLearnerData(course, ag, submissions) {
 		}
 
 		//TODO: Check here or else where for dates
-		result[LearnerSubmission.id] = getAssignGrade(LearnerSubmission)
+
+		result[LearnerSubmission.assignment_id] = getAssignGrade(LearnerSubmission)
 	}
 
 	if (Object.keys(result).length !== 0) {
