@@ -16,10 +16,13 @@ Look at answers.js
 
 ## Bonus
 - [ ] Clean up the average function implementation, very <u>sloppy</u>
+- [ ] Make the fractions the proper format (kinda extension of 4 sigs)
 
 ## For me personally
 - [ ] Figure out if there's a reliable way for the order of properties added to an object will be the same order at all run times
 - [ ] In obsidian, cover this coding situation:
+```js
 //console.log(assignment.points_possible) //TODO: Cover in obsidian
 //console.log(assignment[0].points_possible)
+```
 

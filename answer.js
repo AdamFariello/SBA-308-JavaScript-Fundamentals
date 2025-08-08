@@ -83,12 +83,12 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {	
 	const resultArray = []
 
+	// Date functions
 	function compareDates(beforeDate, afterDate) {
 		const beforeDateObj = new Date(beforeDate)
 		const afterDateObj  = new Date(afterDate)
 		return beforeDateObj <= afterDateObj  
 	}
-
 
 	function submittedBeforeDeadline(learnerDate, assigDate) {
 		if (compareDates(learnerDate,assigDate)) {
@@ -100,30 +100,28 @@ function getLearnerData(course, ag, submissions) {
 			return 0.9 //(1 - 0.1) 
 		}
 	}
-
-	function isDueYet(assignmentDate) {
-		const currDate = new Date(Date.now())		
-		console.log(currDate)
-		console.log(typeof currDate)
-		compareDates(assignmentDate, afterDate)
+	function isDueYet(assignment) {
+		const assignmentDate = assignment.due_at
+		const currDate = Date.now()
+		return compareDates(assignmentDate, currDate)
 	}
 
-	function getAssignment(learnerAssignmentID) {
+
+	// Get Properties functions
+	function getAssignment(learnerSubmitId) {
 		return assignment = AssignmentGroup.assignments.filter(e => {
-			return e.id === learnerAssignmentID  
+			return e.id === learnerSubmitId  
 		})[0] //TODO: In Obsidian, cover the usage of the [0] here
 	}
-
-	function getAssignGrade(LearnerSubmission) {
+	function getScoreAndPossiblePoints(LearnerSubmission, assignment) {
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
-		const assigID = LearnerSubmission.assignment_id
-		getAssignment(assigID)
 
 		//Checking if score works
 		let score = LearnerSubmission.submission.score 
 		const learnerDate = LearnerSubmission.submission.submitted_at
 		const assigDate = assignment.due_at
+		
 		score *= (submittedBeforeDeadline(learnerDate, assigDate))
 
 
@@ -132,6 +130,8 @@ function getLearnerData(course, ag, submissions) {
 		return [score, possiblePoints]
 	}
 
+
+	// Main functions
 	function enterAssigGradesAndAverage(result, submissionsArray) {
 		//TODO: Clean up function, really sloppy
 		let numerator = 0
@@ -170,10 +170,17 @@ function getLearnerData(course, ag, submissions) {
 
 		//TODO: Only sent he assingment id, and instead make the function
 		//		only return the possible points
-		const assignId = LearnerSubmission.assignment_id
-		const submission = {}
- 		submission[assignId] = getAssignGrade(LearnerSubmission)
-		submissionsArray.push(submission)
+		const learnerSubmitId = LearnerSubmission.assignment_id
+		const assignment = getAssignment(learnerSubmitId)
+		if (isDueYet(assignment)) {
+			const submission = {}
+ 			submission[learnerSubmitId] = getScoreAndPossiblePoints(
+				LearnerSubmission, assignment
+			)
+			submissionsArray.push(submission)
+		} else {
+			continue	
+		}
 	}
 
 	if (Object.keys(result).length !== 0) {
