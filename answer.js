@@ -77,10 +77,13 @@ const LearnerSubmissions = [
 ];
 
 
+
+
 //function getLearnerData(CourseInfo, AssignmentGroup, [LearnerSubmission]) 
 function getLearnerData(course, ag, submissions) {	
 	const resultArray = []
-		
+
+
 	function getAssignGrade(LearnerSubmission) {
 		const assigID = LearnerSubmission.assignment_id
 
@@ -88,13 +91,9 @@ function getLearnerData(course, ag, submissions) {
 			return e.id === assigID  
 		})
 
-		//TODO check for if score is past due date (probably not checked here)
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
 
-		//console.log(assignment.points_possible) //TODO: Cover in obsidian
-		//console.log(assignment[0].points_possible)
-			
 
 		//TODO Implement restricting division to specfic digit (?)
 		const score = LearnerSubmission.submission.score 
@@ -138,6 +137,8 @@ function getLearnerData(course, ag, submissions) {
 			}
 		}
 
+		//TODO: Only sent he assingment id, and instead make the function
+		//		only return the possible points
 		const assignId = LearnerSubmission.assignment_id
 		const submission = {}
  		submission[assignId] = getAssignGrade(LearnerSubmission)
@@ -145,9 +146,8 @@ function getLearnerData(course, ag, submissions) {
 	}
 
 	if (Object.keys(result).length !== 0) {
-		//TODO: Add function to caluclate average
+		result = enterAssigGradesAndAverage(result, submissionsArray)
 		resultArray.push(result)
-		result = {}
 	}
 
 	return resultArray
