@@ -103,9 +103,19 @@ function getLearnerData(course, ag, submissions) {
 	}
 
 	function enterAssigGradesAndAverage(result, submissionsArray) {
-		console.log("DEBUG")
-		console.log(result)
-		console.log(submissionsArray)
+		//TODO: Clean up function, really sloppy
+		let numerator = 0
+		let denominator = 0
+		for (submission of submissionsArray) {
+			const key = Object.keys(submission)[0]
+			const arr = submission[key]
+
+			result[key] = arr[0] / arr[1]
+			numerator += arr[0]
+			denominator += arr[1]
+		}
+		result.avg = numerator / denominator 
+		return result
 	}
 		
 

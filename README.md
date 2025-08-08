@@ -9,4 +9,7 @@ Look at answers.js
     - [ ] Create function of calculating points lost due to this
 
 ## Bonus
+- [ ] Clean up the average function implementation, very <u>sloppy</u>
+
+## For me personally
 - [ ] Figure out if there's a reliable way for the order of properties added to an object will be the same order at all run times
