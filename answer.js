@@ -89,14 +89,8 @@ function getLearnerData(course, ag, submissions) {
 		return beforeDateObj <= afterDateObj  
 	}
 
-	function submittedBeforeDeadline(learnerDate, assigDate) {
-		//console.log(typeof learnerDate)
-		//console.log(typeof assigDate)
-	
 
-		//console.log("DEBUG TEST")
-		//console.log(learnerDateObj) 
-		//console.log(assigDateObj)   
+	function submittedBeforeDeadline(learnerDate, assigDate) {
 		if (compareDates(learnerDate,assigDate)) {
 			return 1
 		} else {
@@ -111,17 +105,20 @@ function getLearnerData(course, ag, submissions) {
 		const currDate = new Date(Date.now())		
 		console.log(currDate)
 		console.log(typeof currDate)
-		compareDates(assignmentDate, afterDate) {
+		compareDates(assignmentDate, afterDate)
+	}
+
+	function getAssignment(learnerAssignmentID) {
+		return assignment = AssignmentGroup.assignments.filter(e => {
+			return e.id === learnerAssignmentID  
+		})[0] //TODO: In Obsidian, cover the usage of the [0] here
 	}
 
 	function getAssignGrade(LearnerSubmission) {
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
 		const assigID = LearnerSubmission.assignment_id
-		const assignment = AssignmentGroup.assignments.filter(e => {
-			return e.id === assigID  
-		})[0] //TODO: In Obsidian, cover the usage of the [0] here
-
+		getAssignment(assigID)
 
 		//Checking if score works
 		let score = LearnerSubmission.submission.score 

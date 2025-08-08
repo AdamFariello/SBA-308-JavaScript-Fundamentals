@@ -11,6 +11,9 @@ Look at answers.js
 - [ ] Check if a submission is past the due date
     - [ ] Create function of calculating points lost due to this
 
+- [ ] Split up function to a specific task
+    - [ ] Make it so assignment is just returned
+
 ## Bonus
 - [ ] Clean up the average function implementation, very <u>sloppy</u>
 
