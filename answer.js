@@ -89,8 +89,19 @@ function getLearnerData(course, ag, submissions) {
 
 		const learnerDateObj = new Date(learnerDate)
 		const assigDateObj   = new Date(assigDate)
+
+		console.log("DEBUG TEST")
 		console.log(learnerDateObj) 
 		console.log(assigDateObj)   
+		if (learnerDateObj <= assigDateObj) {
+			//console.log("On time")
+			return 1
+		} else {
+			//console.log("Late")
+			//TODO: Figure if this can be using decmial math
+			//		stackoverflow.com/questions/5037839
+			return 0.9 //(1 - 0.1) 
+		}
 	}
 
 	function getAssignGrade(LearnerSubmission) {
@@ -103,10 +114,10 @@ function getLearnerData(course, ag, submissions) {
 
 
 		//Checking if score works
-		const score = LearnerSubmission.submission.score 
+		let score = LearnerSubmission.submission.score 
 		const learnerDate = LearnerSubmission.submission.submitted_at
 		const assigDate = assignment.due_at
-		calculatePointLoss(learnerDate, assigDate) 
+		score *= (calculatePointLoss(learnerDate, assigDate))
 
 
 		//TODO Implement restricting division to specfic digit (?)
