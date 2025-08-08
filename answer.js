@@ -81,9 +81,6 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {	
 	const resultArray = []
 		
-	//TODO: implement this below; How to check if course is in assignment group
-	//console.log(CourseInfo.id === AssignmentGroup.course_id)
-
 	function getAssignGrade(LearnerSubmission) {
 		const assigID = LearnerSubmission.assignment_id
 
@@ -97,21 +94,32 @@ function getLearnerData(course, ag, submissions) {
 
 		//console.log(assignment.points_possible) //TODO: Cover in obsidian
 		//console.log(assignment[0].points_possible)
-		const possiblePoints = assignment[0].points_possible
-		const score = LearnerSubmission.submission.score 
+			
 
 		//TODO Implement restricting division to specfic digit (?)
-		return score / possiblePoints 
+		const score = LearnerSubmission.submission.score 
+		const possiblePoints = assignment[0].points_possible
+		return [score, possiblePoints]
+	}
+
+	function enterAssigGradesAndAverage(result, submissionsArray) {
+		console.log("DEBUG")
+		console.log(result)
+		console.log(submissionsArray)
 	}
 		
 
 	let result = {}
+	let submissionsArray = []
 	for (LearnerSubmission of LearnerSubmissions) {
 		if (Object.keys(result).length !== 0 && 
 			LearnerSubmission.learner_id !== result.id) {
 			//TODO: Add function to caluclate average
+			result = enterAssigGradesAndAverage(result, submissionsArray)
 			resultArray.push(result)
+			
 			result = {}
+			submissionsArray = [] 
 		}
 		if (Object.keys(result).length === 0) {
 			result = {
@@ -120,9 +128,10 @@ function getLearnerData(course, ag, submissions) {
 			}
 		}
 
-		//TODO: Check here or else where for dates
-
-		result[LearnerSubmission.assignment_id] = getAssignGrade(LearnerSubmission)
+		const assignId = LearnerSubmission.assignment_id
+		const submission = {}
+ 		submission[assignId] = getAssignGrade(LearnerSubmission)
+		submissionsArray.push(submission)
 	}
 
 	if (Object.keys(result).length !== 0) {
