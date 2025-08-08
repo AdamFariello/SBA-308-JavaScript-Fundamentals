@@ -83,21 +83,34 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {	
 	const resultArray = []
 
+	function calculatePointLoss(learnerDate, assigDate) {
+		//console.log(typeof learnerDate)
+		//console.log(typeof assigDate)
+
+		const learnerDateObj = new Date(learnerDate)
+		const assigDateObj   = new Date(assigDate)
+		console.log(learnerDateObj) 
+		console.log(assigDateObj)   
+	}
 
 	function getAssignGrade(LearnerSubmission) {
-		const assigID = LearnerSubmission.assignment_id
-
-		const assignment = AssignmentGroup.assignments.filter(e => {
-			return e.id === assigID  
-		})
-
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
+		const assigID = LearnerSubmission.assignment_id
+		const assignment = AssignmentGroup.assignments.filter(e => {
+			return e.id === assigID  
+		})[0] //TODO: In Obsidian, cover the usage of the [0] here
+
+
+		//Checking if score works
+		const score = LearnerSubmission.submission.score 
+		const learnerDate = LearnerSubmission.submission.submitted_at
+		const assigDate = assignment.due_at
+		calculatePointLoss(learnerDate, assigDate) 
 
 
 		//TODO Implement restricting division to specfic digit (?)
-		const score = LearnerSubmission.submission.score 
-		const possiblePoints = assignment[0].points_possible
+		const possiblePoints = assignment.points_possible
 		return [score, possiblePoints]
 	}
 
