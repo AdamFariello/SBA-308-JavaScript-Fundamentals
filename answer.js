@@ -83,18 +83,21 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {	
 	const resultArray = []
 
+	function compareDates(beforeDate, afterDate) {
+		const beforeDateObj = new Date(beforeDate)
+		const afterDateObj  = new Date(afterDate)
+		return beforeDateObj <= afterDateObj  
+	}
+
 	function calculatePointLoss(learnerDate, assigDate) {
 		//console.log(typeof learnerDate)
 		//console.log(typeof assigDate)
+	
 
-		const learnerDateObj = new Date(learnerDate)
-		const assigDateObj   = new Date(assigDate)
-
-		console.log("DEBUG TEST")
-		console.log(learnerDateObj) 
-		console.log(assigDateObj)   
-		if (learnerDateObj <= assigDateObj) {
-			//console.log("On time")
+		//console.log("DEBUG TEST")
+		//console.log(learnerDateObj) 
+		//console.log(assigDateObj)   
+		if (compareDates(learnerDate,assigDate)) {
 			return 1
 		} else {
 			//console.log("Late")
