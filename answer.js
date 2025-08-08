@@ -89,7 +89,7 @@ function getLearnerData(course, ag, submissions) {
 		return beforeDateObj <= afterDateObj  
 	}
 
-	function calculatePointLoss(learnerDate, assigDate) {
+	function submittedBeforeDeadline(learnerDate, assigDate) {
 		//console.log(typeof learnerDate)
 		//console.log(typeof assigDate)
 	
@@ -107,6 +107,13 @@ function getLearnerData(course, ag, submissions) {
 		}
 	}
 
+	function isDueYet(assignmentDate) {
+		const currDate = new Date(Date.now())		
+		console.log(currDate)
+		console.log(typeof currDate)
+		compareDates(assignmentDate, afterDate) {
+	}
+
 	function getAssignGrade(LearnerSubmission) {
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
@@ -120,7 +127,7 @@ function getLearnerData(course, ag, submissions) {
 		let score = LearnerSubmission.submission.score 
 		const learnerDate = LearnerSubmission.submission.submitted_at
 		const assigDate = assignment.due_at
-		score *= (calculatePointLoss(learnerDate, assigDate))
+		score *= (submittedBeforeDeadline(learnerDate, assigDate))
 
 
 		//TODO Implement restricting division to specfic digit (?)
