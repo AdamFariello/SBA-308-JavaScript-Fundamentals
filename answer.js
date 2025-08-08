@@ -89,17 +89,6 @@ function getLearnerData(course, ag, submissions) {
 		const afterDateObj  = new Date(afterDate)
 		return beforeDateObj <= afterDateObj  
 	}
-
-	function submittedBeforeDeadline(learnerDate, assigDate) {
-		if (compareDates(learnerDate,assigDate)) {
-			return 1
-		} else {
-			//console.log("Late")
-			//TODO: Figure if this can be using decmial math
-			//		stackoverflow.com/questions/5037839
-			return 0.9 //(1 - 0.1) 
-		}
-	}
 	function isDueYet(assignment) {
 		const assignmentDate = assignment.due_at
 		const currDate = Date.now()
@@ -117,16 +106,19 @@ function getLearnerData(course, ag, submissions) {
 		//TODO add checks for zero
 		//TODO add check for null (return zero?)
 
+		//Get possible points
+		const possiblePoints = assignment.points_possible
+
 		//Checking if score works
 		let score = LearnerSubmission.submission.score 
-		const learnerDate = LearnerSubmission.submission.submitted_at
-		const assigDate = assignment.due_at
+		const submittedDate = LearnerSubmission.submission.submitted_at
+		const dueDate = assignment.due_at
 		
-		score *= (submittedBeforeDeadline(learnerDate, assigDate))
-
+		if (compareDates(submittedDate, dueDate) !== true) {
+			score -= (possiblePoints * 0.1)
+		}
 
 		//TODO Implement restricting division to specfic digit (?)
-		const possiblePoints = assignment.points_possible
 		return [score, possiblePoints]
 	}
 
