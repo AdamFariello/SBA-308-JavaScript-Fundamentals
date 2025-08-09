@@ -30,7 +30,8 @@ function getLearnerData(course, ag, submissions) {
 	// Get Properties functions
 	function getAssignment(learnerSubmitId) {
 		return AssignmentGroup.assignments.filter(e => {
-			return e.id === learnerSubmitId  
+			//TODO: make sure it can't be lost as a string
+			return (e.id * 1) === learnerSubmitId  
 		})[0] 
 	}
 	function getScoreAndPossiblePoints(LearnerSubmission, assignment) {
