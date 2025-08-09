@@ -1,4 +1,4 @@
-// Main import
+// Given/Main import
 //import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.given.mjs";
 
 // Test imports
