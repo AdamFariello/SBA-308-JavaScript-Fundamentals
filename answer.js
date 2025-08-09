@@ -1,4 +1,9 @@
-import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs";
+// Main import
+//import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs";
+// Test imports
+import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./testImports/import.zero.mjs";
+
+
 
 //function getLearnerData(CourseInfo, AssignmentGroup, [LearnerSubmission]) 
 function getLearnerData(course, ag, submissions) {	

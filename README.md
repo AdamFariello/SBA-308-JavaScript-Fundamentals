@@ -15,6 +15,8 @@ Look at answers.js on the main branch (newest commit)
 - [ ] Split up function to a specific task
     - [ ] Make it so assignment is just returned
 
+- [X] Added module files for testing
+    - [ ] Added separate module file for testing 0 inputs
 
 ## Bonus
 - [ ] Clean up the average function implementation, very <u>sloppy</u>
