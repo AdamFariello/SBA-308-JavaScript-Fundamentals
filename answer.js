@@ -57,7 +57,10 @@ function getLearnerData(course, ag, submissions) {
 		let numerator = 0
 		let denominator = 0
 		let submission = null
-		for (submission of submissionsArray) {
+		//for (submission of submissionsArray) {
+		while (submissionsArray.length != 0) {
+			submission = submissionsArray.pop()
+			
 			const key = Object.keys(submission)[0]
 			const arr = submission[key]
 	
