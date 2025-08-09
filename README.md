@@ -1,5 +1,9 @@
 # For grading
-Look at answers.js on the main branch (newest commit)
+Run the command
+```bash
+node answer.js
+```
+(The file from the main branch, most recent import)
 
 
 # TODO

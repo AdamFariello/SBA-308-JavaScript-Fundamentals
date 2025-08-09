@@ -1,7 +1,7 @@
 // Main import
-//import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs";
+import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs";
 // Test imports
-import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./testImports/import.zero.mjs";
+//import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./testImports/import.zero.mjs";
 
 
 
@@ -40,7 +40,9 @@ function getLearnerData(course, ag, submissions) {
 		const submittedDate = LearnerSubmission.submission.submitted_at
 		const dueDate = assignment.due_at
 		
-		if (compareDates(submittedDate, dueDate) !== true) {
+		//Added this const to fill requirements
+		const isSubmitBeforeDueDate = compareDates(submittedDate, dueDate)
+		if (isSubmitBeforeDueDate !== true) {
 			score -= (possiblePoints * 0.1)
 		}
 
