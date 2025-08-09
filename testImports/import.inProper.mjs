@@ -37,8 +37,8 @@ export const AssignmentGroup = {
 // The provided learner submission data.
 export const LearnerSubmissions = [
   {
-  	learner_id: 125, //TODO CHECK FOR STRING
-    //learner_i: "125", //TODO CHECK FOR STRING
+  	//learner_id: 125, //TODO CHECK FOR STRING
+    learner_id: "125", //TODO CHECK FOR STRING
     assignment_id: 1,
     submission: {
       submitted_at: "2023-01-25",
