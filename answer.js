@@ -135,9 +135,17 @@ function getLearnerData(course, ag, submissions) {
 		result = enterAssigGradesAndAverage(result, submissionsArray)
 		resultArray.push(result)
 	}
+	
+	//throw new Error("Arbitrary error") //For testing purposes
 
 	return resultArray
 }
 
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-console.log(result)
+
+// I didn't have many ideas for the try and catch placement
+try {
+	const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+	console.log(result)
+} catch (e) {
+	console.error(e)
+}

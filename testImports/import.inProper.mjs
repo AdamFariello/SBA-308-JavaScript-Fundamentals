@@ -37,12 +37,16 @@ export const AssignmentGroup = {
 // The provided learner submission data.
 export const LearnerSubmissions = [
   {
-  	//learner_id: 125, //TODO CHECK FOR STRING
-    learner_id: "125", //TODO CHECK FOR STRING
+  	//learner_id: 125, 
+    learner_id: "125", //TODO CHECK FOR STRING, had to fix
     assignment_id: 1,
     submission: {
-      submitted_at: "2023-01-25",
+    submitted_at: "2023-01-25",
+	//submitted_at: Date("2023-01-25"), //TODO check for date, GIVES CURRENT DATE IF USED
+										//I'M NOT CHECKING FOR IMPROPER DATA INPUT LIKE THIS
+										//stackoverflow.com/questions/39223481
       score: 47
+     // score: "47" //TODO check for string
     }
   },
   {
