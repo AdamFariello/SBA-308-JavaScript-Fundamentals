@@ -100,7 +100,7 @@ function getLearnerData(course, ag, submissions) {
 	function getAssignment(learnerSubmitId) {
 		return assignment = AssignmentGroup.assignments.filter(e => {
 			return e.id === learnerSubmitId  
-		})[0] //TODO: In Obsidian, cover the usage of the [0] here
+		})[0] 
 	}
 	function getScoreAndPossiblePoints(LearnerSubmission, assignment) {
 		//TODO add checks for zero
@@ -131,12 +131,26 @@ function getLearnerData(course, ag, submissions) {
 		for (submission of submissionsArray) {
 			const key = Object.keys(submission)[0]
 			const arr = submission[key]
+	
+			//Overkill, but added to make check clearer
+			const score = arr[0]
+			const possiblePoints = arr[1]
 
-			result[key] = arr[0] / arr[1]
-			numerator += arr[0]
-			denominator += arr[1]
+			if (possiblePoints === 0) {
+				result[key] = 0
+			} else {
+				result[key] = score / possiblePoints
+			}
+			
+			numerator += score 			
+			denominator += possiblePoints 	
 		}
-		result.avg = numerator / denominator 
+		
+		if (denominator === 0)  {
+			result.avg = 0
+		} else {
+			result.avg = numerator / denominator 
+		}
 		return result
 	}
 		

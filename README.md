@@ -1,5 +1,6 @@
 # For grading
-Look at answers.js
+Look at answers.js on the main branch (newest commit)
+
 
 # TODO
 ## Mandatory
@@ -14,15 +15,25 @@ Look at answers.js
 - [ ] Split up function to a specific task
     - [ ] Make it so assignment is just returned
 
+
 ## Bonus
 - [ ] Clean up the average function implementation, very <u>sloppy</u>
 - [ ] Make the fractions the proper format (kinda extension of 4 sigs)
 
+
 ## For me personally
 - [ ] Figure out if there's a reliable way for the order of properties added to an object will be the same order at all run times
 - [ ] In obsidian, cover this coding situation:
+
 ```js
 //console.log(assignment.points_possible) //TODO: Cover in obsidian
 //console.log(assignment[0].points_possible)
+```
+```js
+function getAssignment(learnerSubmitId) {
+    return assignment = AssignmentGroup.assignments.filter(e => {
+            return e.id === learnerSubmitId
+    })[0] //TODO: In Obsidian, cover the usage of the [0] here
+}
 ```
 
