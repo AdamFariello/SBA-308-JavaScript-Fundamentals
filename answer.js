@@ -34,9 +34,6 @@ function getLearnerData(course, ag, submissions) {
 		})[0] 
 	}
 	function getScoreAndPossiblePoints(LearnerSubmission, assignment) {
-		//TODO add checks for zero
-		//TODO add check for null (return zero?)
-
 		//Get possible points
 		const possiblePoints = assignment.points_possible
 
