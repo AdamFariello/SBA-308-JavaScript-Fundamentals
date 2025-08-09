@@ -5,9 +5,14 @@ import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs
 
 
 
+
 //function getLearnerData(CourseInfo, AssignmentGroup, [LearnerSubmission]) 
 function getLearnerData(course, ag, submissions) {	
-	const resultArray = []
+	// Formating functions
+	const sigFigs = 3
+	function formatNum(num) {
+		return num.toFixed(sigFigs) * 1
+	}
 
 	// Date functions
 	function compareDates(beforeDate, afterDate) {
@@ -71,7 +76,8 @@ function getLearnerData(course, ag, submissions) {
 			if (possiblePoints === 0) {
 				result[key] = 0
 			} else {
-				result[key] = score / possiblePoints
+				//result[key] = (score / possiblePoints).toFixed(3) * 1
+				result[key] = formatNum(score / possiblePoints)
 			}
 			
 			numerator += score 			
@@ -81,13 +87,15 @@ function getLearnerData(course, ag, submissions) {
 		if (denominator === 0)  {
 			result.avg = 0
 		} else {
-			result.avg = numerator / denominator 
+			//result.avg = (numerator / denominator) * 1
+			result.avg = formatNum(numerator / denominator)
 		}
 		return result
 	}
 		
 
 	let result = {}
+	const resultArray = []
 	let submissionsArray = []
 	let LearnerSubmission = null
 	for (LearnerSubmission of LearnerSubmissions) {
