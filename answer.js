@@ -1,7 +1,9 @@
 // Main import
-import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.main.mjs";
+//import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./import.given.mjs";
+
 // Test imports
 //import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./testImports/import.zero.mjs";
+import {CourseInfo, AssignmentGroup, LearnerSubmissions} from "./testImports/import.inProper.mjs";
 
 
 
